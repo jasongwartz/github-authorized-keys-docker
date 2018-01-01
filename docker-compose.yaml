@@ -1,0 +1,8 @@
+version: "3"
+services:
+  github_keys:
+    image: jasongwartz/github-authorized-keys-docker
+    volumes:
+    - ~/.ssh:/root/.ssh
+    environment:
+    - GITHUB_USER=${GITHUB_USER}

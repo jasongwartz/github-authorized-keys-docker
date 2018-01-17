@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+    name: github-authorized-keys
+    labels:
+        app: github-authorized-keys
+spec:
+    selector:
+        matchLabels:
+            name: github-authorized-keys
+    template:
+        metadata:
+            labels:
+                name: github-authorized-keys
+        spec:
+            containers:
+            - name: github-authorized-keys
+              image: jasongwartz/github-authorized-keys-docker:arm
+              env:
+              - name: GITHUB_USER
+                value: jasongwartz
+              volumeMounts:
+              - mountPath: /root/.ssh
+                name: jason-ssh
+            volumes:
+            - name: jason-ssh
+              hostPath:
+                path: /home/jasongwartz/.ssh
+                type: DirectoryOrCreate

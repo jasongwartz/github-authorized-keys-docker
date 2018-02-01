@@ -9,7 +9,7 @@ Specify the github user keys to pull using an environment variable to `docker ru
 ```
 # with docker run:
 docker run \
-  -v ~/.ssh:/root/.ssh \
+  -v ~/.ssh:/perl/.ssh \
   -e GITHUB_USER=jasongwartz \
     jasongwartz/github-authorized-keys-docker
 

@@ -19,8 +19,10 @@ spec:
               env:
               - name: GITHUB_USER
                 value: jasongwartz
+              - name: SLEEP_TIME
+                value: 600
               volumeMounts:
-              - mountPath: /root/.ssh
+              - mountPath: /perl/.ssh
                 name: jason-ssh
             volumes:
             - name: jason-ssh

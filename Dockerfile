@@ -8,5 +8,6 @@ RUN apk update && \
     cpanm LWP::UserAgent LWP::Simple JSON LWP::Protocol::https
 
 COPY github-ssh-keys.pl github-ssh-keys.pl
+COPY daemon.sh daemon.sh
 
-CMD ["perl", "github-ssh-keys.pl"]
+CMD ["sh", "daemon.sh"]

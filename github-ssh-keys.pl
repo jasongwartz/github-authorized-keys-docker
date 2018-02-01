@@ -36,9 +36,6 @@ sub get_and_store_keys {
     print "Wrote ssh keys for $github_user to $filename.\n";
 }
 
-while ( 1 ) {
-    my $t = localtime;
-    print "$t", "\t| Starting request.\n";
-    get_and_store_keys;
-    sleep $ENV{ SLEEP_TIME };
-}
+my $t = localtime;
+print "$t", "\t| Starting request.\n";
+get_and_store_keys;

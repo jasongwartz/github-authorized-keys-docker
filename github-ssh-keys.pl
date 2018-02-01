@@ -15,20 +15,32 @@ use Data::Dumper;
 use JSON;
 
 use LWP::UserAgent;
-my $ua = LWP::UserAgent->new;
 
-my $github_user = $ENV{ GITHUB_USER } // $ARGV[0] // die "Need to specify a github user.";
+sub get_and_store_keys {
 
-my $json_keys = $ua->get("https://api.github.com/users/$github_user/keys")->decoded_content;
-die "Couldn't get keys." unless defined $json_keys;
+    my $ua = LWP::UserAgent->new;
 
-my @keys = map { $_->{ key } } @{ decode_json($json_keys) };
-my $authorized_keys = join("\n", @keys);
+    my $github_user = $ENV{ GITHUB_USER } // $ARGV[0] // die "Need to specify a github user.";
 
-my $filename = $ENV{ HOME } . "/.ssh/authorized_keys";
-open(my $fh, '>', $filename) or die "Couldn't open authorized_keys file:\n\t$!";
+    my $json_keys = $ua->get("https://api.github.com/users/$github_user/keys")->decoded_content;
+    print "Couldn't get keys." && return unless defined $json_keys;
 
-print $fh $authorized_keys;
-close $fh;
+    my @decoded = @{ decode_json($json_keys) };
 
-print "Wrote ssh keys for $github_user to $filename.\n";
+    my @keys = map { $_->{ key } } @decoded;
+    my $authorized_keys = join("\n", @keys);
+
+    my $filename = $ENV{ HOME } . "/.ssh/authorized_keys";
+    open(my $fh, '>', $filename) or die "Couldn't open authorized_keys file:\n\t$!";
+
+    print $fh $authorized_keys;
+    close $fh;
+
+    print "Wrote ssh keys for $github_user to $filename.\n";
+}
+
+die "Must provide the 'SLEEP_TIME' env var." unless $ENV{ SLEEP_TIME };
+while ( 1 ) {
+    get_and_store_keys;
+    sleep $ENV{ SLEEP_TIME };
+}

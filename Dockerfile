@@ -1,6 +1,6 @@
-# For x86: scottw/alpine-perl:5.26.1
+# For x86: jasongwartz/alpine-perl:5.26.1-x86
 # For arm: jasongwartz/alpine-perl:5.26.1-arm
-FROM scottw/alpine-perl:5.26.1
+FROM jasongwartz/alpine-perl:5.26.1-x86
 
 
 RUN apk update && \

@@ -20,7 +20,7 @@ sub get_and_store_keys {
     return unless defined $json_keys;
 
     my $decoded = decode_json($json_keys);
-    print "Rate limited\n" and return if index($decoded->{ message }, "limit exceeded");
+    print "Rate limited\n" and return if ref $decoded eq "HASH" && index($decoded->{ message }, "limit exceeded");
 
     my @keys = map { $_->{ key } } @{ $decoded };
     my $authorized_keys = join("\n", @keys);

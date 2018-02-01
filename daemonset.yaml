@@ -20,7 +20,7 @@ spec:
               - name: GITHUB_USER
                 value: jasongwartz
               - name: SLEEP_TIME
-                value: 600
+                value: "600"
               volumeMounts:
               - mountPath: /perl/.ssh
                 name: jason-ssh

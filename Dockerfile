@@ -1,6 +1,5 @@
 FROM jasongwartz/alpine-perl:5.26.1-arm
 
-
 RUN apk update && \
     apk add openssl openssl-dev && \
     adduser -S perl && \

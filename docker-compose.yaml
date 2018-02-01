@@ -3,6 +3,6 @@ services:
   github_keys:
     image: jasongwartz/github-authorized-keys-docker
     volumes:
-    - ~/.ssh:/root/.ssh
+    - ~/.ssh:/perl/.ssh
     environment:
     - GITHUB_USER=${GITHUB_USER}

@@ -7,9 +7,6 @@ RUN apk update && \
     apk add openssl openssl-dev && \
     cpanm LWP::UserAgent LWP::Simple JSON LWP::Protocol::https
 
-RUN adduser -S perl
-
 COPY github-ssh-keys.pl github-ssh-keys.pl
-USER perl
 
 CMD ["perl", "github-ssh-keys.pl"]
